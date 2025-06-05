@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Raftaar - Suraj</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+      min-height: 100vh;
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .nav {
+      background-color: rgba(207, 25, 210, 0.8);
+      color: #fff;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      padding-left: 0;
+    }
+
+    nav ul li {
+      cursor: pointer;
+      color: yellow;
+      font-size: 16px;
+    }
+
+    nav ul li:hover {
+      color: white;
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 20px;
+      text-align: center;
+      gap: 20px;
+    }
+
+    .circle-img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 6px solid white;
+      animation: bounce 3s infinite ease-in-out;
+      transition: transform 0.5s ease, box-shadow 0.4s ease;
+    }
+
+    .circle-img:hover {
+      transform: scale(1.1) rotate(2deg);
+      box-shadow: 0 15px 35px rgba(255, 255, 0, 0.8);
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .circle-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    h3 {
+      font-size: 2rem;
+      color: white;
+    }
+
+    #role {
+      color: yellow;
+      border-right: 2px solid white;
+      white-space: nowrap;
+      overflow: hidden;
+      display: inline-block;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 1.4rem;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .card {
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.07);
+      box-shadow: 0 12px 25px rgba(255, 206, 0, 0.7);
+    }
+
+    .card img {
+      width: 100%;
+      max-height: 120px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #301010;
+    }
+
+    .content-section {
+      padding: 25px;
+      color: white;
+      text-align: center;
+    }
+
+    footer {
+      background-color: #daa0ee;
+      color: #1c144c;
+      text-align: center;
+      padding: 15px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      box-shadow: inset 0 0 30px #b318b3;
+    }
+
+    footer a {
+      color: #1c144c;
+      margin: 0 10px;
+      font-size: 22px;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: #ffec00;
+    }
+
+    footer p {
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+
+    .login, .contact {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 400px;
+      width: 100%;
+      margin: 20px auto;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .login h2, .contact h3 {
+      color: #6a11cb;
+      margin-bottom: 15px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 10px;
+      background-color: #6a11cb;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #4d089a;
+    }
+
+    /* Small screens */
+    @media (max-width: 500px) {
+      .circle-img {
+        width: 140px;
+        height: 140px;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+      }
+
+      #role {
+        font-size: 1.1rem;
+      }
+
+      nav ul {
+        gap: 10px;
+        font-size: 14px;
+        justify-content: center;
+      }
+
+      .card img {
+        max-height: 100px;
+      }
+
+      .container {
+        gap: 15px;
+        padding: 15px;
+      }
+
+      .card p {
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="nav">
+    <div class="logo">Suraj</div>
+    <nav>
+      <ul>
+        <li onclick="loadPage('home')">Home</li>
+        <li onclick="loadPage('about')">About</li>
+        <li onclick="loadPage('login')">Login</li>
+        <li onclick="loadPage('contact')">Contact</li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="hero" id="hero">
+    <div class="circle-img">
+      <img src="c:\Users\DK\OneDrive\Desktop\m.jpeg" alt="Suraj's Photo" />
+    </div>
+    <h3>I'm <span id="role"></span></h3>
+  </div>
+
+  <div class="container" id="main-content"></div>
+
+  <footer>
+    <a href="#"><i class="fab fa-github"></i></a>
+    <a href="#"><i class="fab fa-linkedin"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+    <p>📧 sura@gmail.com & Contact: 📞 +9370944696</p>
+  </footer>
+
+  <script>
+    const roles = [
+      "software developer",
+      "software engineer",
+      "web developer",
+      "problem solver",
+      "frontend expert",
+      "backend ninja"
+    ];
+    const roleElement = document.getElementById("role");
+    let roleIndex = 0, charIndex = 0, isDeleting = false;
+
+    function typeWriterEffect() {
+      const current = roles[roleIndex];
+      if (!isDeleting) {
+        roleElement.textContent = current.substring(0, charIndex + 1);
+        charIndex++;
+        if (charIndex === current.length) {
+          isDeleting = true;
+          setTimeout(typeWriterEffect, 1500);
+          return;
+        }
+      } else {
+        roleElement.textContent = current.substring(0, charIndex - 1);
+        charIndex--;
+        if (charIndex === 0) {
+          isDeleting = false;
+          roleIndex = (roleIndex + 1) % roles.length;
+        }
+      }
+      setTimeout(typeWriterEffect, isDeleting ? 60 : 120);
+    }
+    typeWriterEffect();
+
+    function loadPage(page) {
+      const content = document.getElementById("main-content");
+      const hero = document.getElementById("hero");
+      if (page === "home") {
+        hero.style.display = "flex";
+        content.innerHTML = `
+          <div class="card"><img src="https://img.icons8.com/color/96/html-5.png"><p>Frontend Development using HTML, CSS, JavaScript</p></div>
+          <div class="card"><img src="https://img.icons8.com/color/96/nodejs.png"><p>Backend Engineering with Node.js and Express</p></div>
+          <div class="card"><img src="https://img.icons8.com/color/96/database.png"><p>Database Management with MongoDB and MySQL</p></div>
+          <div class="card"><img src="https://img.icons8.com/color/96/source-code.png"><p>RESTful API Development & Integration</p></div>
+          <div class="card"><img src="https://img.icons8.com/color/96/source-code.png"><p>Clean & Modular Code using MVC Architecture</p></div>
+          <div class="card"><img src="https://img.icons8.com/material-rounded/96/github.png"><p>Version Control with Git & GitHub</p></div>
+          <div class="card"><img src="https://img.icons8.com/color/96/react-native.png"><p>Frontend Development using React.js</p></div>
+          <div class="card"><img src="https://img.icons8.com/color/96/settings--v1.png"><p>Basic DevOps & CI/CD Workflow</p></div>
+        `;
+      } else {
+        hero.style.display = "none";
+        switch (page) {
+          case "about":
+            content.innerHTML = `<div class="content-section"><h2>About Me</h2><p>Hello, I'm Suraj — a passionate developer experienced in full-stack development and modern web technologies.</p></div>`;
+            break;
+          case "login":
+            content.innerHTML = `
+              <div class="login">
+                <h2>Login</h2>
+                <form>
+                  <input type="email" placeholder="Enter your email" required />
+                  <input type="password" placeholder="Enter your password" required />
+                  <button type="submit">Login</button>
+                </form>
+              </div>`;
+            break;
+          case "contact":
+            content.innerHTML = `
+              <div class="contact">
+                <h3>Contact Me</h3>
+                <p><strong>Name:</strong> Suraj</p>
+                <p><strong>Email:</strong> <a href="mailto:sura@gmail.com">sura@gmail.com</a></p>
+                <p><strong>Phone:</strong> 📞 9370944696</p>
+              </div>`;
+            break;
+        }
+      }
+    }
+
+    // Load home by default
+    loadPage("home");
+  </script>
+
+</body>
+</html>
